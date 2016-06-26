@@ -3,6 +3,7 @@ var ReactFireMixin = require('reactfire')
 var Firebase = require('firebase');
 var helpers = require('../../utils/helpers');
 var axios = require('axios');
+var Map = require('./googleMap'); 
 
 var courts = []; 
 
@@ -38,7 +39,11 @@ var Home = React.createClass({
 				<div>
 				{JSON.stringify(_this.state.courts)}
 				 </div>
-				
+				 <br/>
+				<div>
+				<Map mlat="55.0000" mlong="-113.0000"/>
+				</div>
+				<br/>		
 				
 			</div>
 		)

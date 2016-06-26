@@ -24178,6 +24178,7 @@
 	var Firebase = __webpack_require__(211);
 	var helpers = __webpack_require__(212);
 	var axios = __webpack_require__(213);
+	var Map = __webpack_require__(230);
 
 	var courts = [];
 
@@ -24217,7 +24218,14 @@
 					'div',
 					null,
 					JSON.stringify(_this.state.courts)
-				)
+				),
+				React.createElement('br', null),
+				React.createElement(
+					'div',
+					null,
+					React.createElement(Map, { mlat: '55.0000', mlong: '-113.0000' })
+				),
+				React.createElement('br', null)
 			);
 		}
 
@@ -25968,6 +25976,48 @@
 	  };
 	};
 
+
+/***/ },
+/* 230 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var GoogleMap = React.createClass({
+	    displayName: 'GoogleMap',
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            initialZoom: 6,
+	            mapCenterLat: 53.5333,
+	            mapCenterLng: -113.4073126
+	        };
+	    },
+	    componentDidMount: function componentDidMount(rootNode) {
+	        var mapOptions = {
+	            center: this.mapCenterLatLng(),
+	            zoom: this.props.initialZoom
+	        },
+	            map = new google.maps.Map(this.getDOMNode(), mapOptions);
+	        var marker = new google.maps.Marker({ position: this.mapCenterLatLng(), title: 'Hi', map: map });
+	        this.setState({ map: map });
+	    },
+	    mapCenterLatLng: function mapCenterLatLng() {
+	        var props = this.props;
+
+	        return new google.maps.LatLng(props.mapCenterLat, props.mapCenterLng);
+	    },
+	    render: function render() {
+	        var style = { height: '300px',
+	            width: '50%'
+	        };
+	        return React.createElement('div', { className: 'map-gic', style: style });
+	    }
+	});
+
+	module.exports = GoogleMap;
 
 /***/ }
 /******/ ]);
