@@ -31,7 +31,7 @@ var Home = React.createClass({
   },
 	
 	render: function(){
-		console.log("this is courts! ", courts);
+		
 		var _this = this; 
 		return(
 			<div>
@@ -41,7 +41,7 @@ var Home = React.createClass({
 				 </div>
 				 <br/>
 				<div>
-				<Map mlat="55.0000" mlong="-113.0000"/>
+				<Map mlat="55.0000" mlong="-113.0000" data={_this.state.courts}/>
 				</div>
 				<br/>		
 				
