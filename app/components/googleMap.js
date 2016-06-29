@@ -22,17 +22,10 @@ var axios = require('axios');
                 courts: snapshot.val().sfcourts
             });
 
-            courts = snapshot.val().sfcourts;
             
-  
-
-
     	   var styles = [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#3a3a3a"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"lightness":20}]},{"featureType":"administrative","elementType":"labels","stylers":[{"visibility":"on"},{"saturation":"0"},{"lightness":"100"},{"color":"#ffffff"}]},{"featureType":"administrative","elementType":"labels.text.stroke","stylers":[{"visibility":"off"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"}]},{"featureType":"landscape.natural.landcover","elementType":"labels.text.fill","stylers":[{"lightness":"-37"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"weight":0.2},{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"lightness":"34"},{"color":"#e74110"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#090909"},{"lightness":16}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"}]},{"featureType":"water","elementType":"geometry","stylers":[{"lightness":17},{"color":"#1a1a1a"}]}]; 
         
 		
-		
-        
-
 
         function Legend(controlDiv, map) {
           // Set CSS styles for the DIV containing the control
@@ -65,11 +58,6 @@ var axios = require('axios');
           controlUI.appendChild(controlText); 
         }
 
-
-
-
-		
-			courts = snapshot.val().sfcourts
 			
 			 var mapOptions = {
                 center: _this.mapCenterLatLng(),
@@ -81,14 +69,12 @@ var axios = require('axios');
 
             
         
-        var points = [];
-        // shop var pinColor = "26DFE9";
-        // club var pinColor = "F8EC3B"; 
-        // pbulic var pinColor = "3BF83E";
-        // other var pinColor = "DF7920"; 
-        // default var pinColor = "FE7569";
+         
         
-        	for(var i=0; i<courts.length; i++){
+            var points = [];
+    
+        
+        	for(var i=0; i<_this.state.courts.length; i++){
         		var temp = [_this.state.courts[i].xcoord,_this.state.courts[i].ycoord]
         		var a = new google.maps.LatLng(temp[0],temp[1]);
         		points.push(a);
@@ -113,6 +99,7 @@ var axios = require('axios');
             }
 
         	for(var j=0; j<points.length; j++){
+                (function(j){
 
                 var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + getPinColor(_this.state.courts[j]),
                   new google.maps.Size(21, 34),
@@ -130,11 +117,31 @@ var axios = require('axios');
         			map: map
         		});
         		
-        		
+        		var contentString = '<div id="content" >'+ _this.state.courts[j].name +'">' +
+            
+            '<font color = "orange">'+ '<b>'+'<br>' + 
+            '</b>'+ '<br>' + '</a>' +
+            'lat: ' + _this.state.courts[j].xcoord + ' lng: ' + _this.state.courts[j].ycoord + 
+            '<br>' + '</font>'+
+            '</div>';
+            
+          // Create new info window - Popup with street location and the title of the movie 
+          var infowindow = new google.maps.InfoWindow({
+          content: contentString
+          });
+
+
+           google.maps.event.addListener(marker, 'click', function() {
+              infowindow.open(map,marker);
+            });
         		
         		bounds.extend(marker.getPosition());
         		map.setCenter(bounds.getCenter());
-        	}
+        	
+
+                })(j) // maintain the data from the marker 
+
+            }
         
         	map.setZoom(map.getZoom()); 
 
@@ -148,8 +155,6 @@ var axios = require('axios');
 		});
 
         
-
-      
        
     },
     mapCenterLatLng: function () {
