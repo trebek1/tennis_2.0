@@ -17,11 +17,11 @@ var Home = React.createClass({
 
 	componentDidMount: function(){
 	
-	var _this = this;
-	var ref = new Firebase('https://sftennisapp.firebaseio.com')
-	ref.once("value", function(snapshot) {
+	var _this = this; 
+	this.ref = new Firebase('https://sftennisapp.firebaseio.com')
+	this.ref.once("value", function(snapshot) {
 		//console.log("take the shot ", snapshot.val().sfcourts[0]);
-		
+		console.log("this is snapshot ", snapshot.val());
 		_this.setState({
 			courts: snapshot.val().sfcourts
 		});
@@ -31,17 +31,18 @@ var Home = React.createClass({
   },
 	
 	render: function(){
-		
+		console.log("This is state ", this.state);
+		// {JSON.stringify(_this.state.courts)}
 		var _this = this; 
 		return(
 			<div>
 				<h2 className="text-center"> Tennis Courts </h2>
 				<div>
-				{JSON.stringify(_this.state.courts)}
+				
 				 </div>
 				 <br/>
 				<div>
-				<Map mlat="55.0000" mlong="-113.0000" data={_this.state.courts}/>
+				<Map mlat="55.0000" mlong="-113.0000"/>
 				</div>
 				<br/>		
 				
