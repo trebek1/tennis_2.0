@@ -20,11 +20,8 @@ var Home = React.createClass({
 						Tennis Courts
 					</h1>
 				</nav>
-	        <div className="col-md-6">
+	        <div>
 	          <Map/>
-	        </div>
-	        <div className="col-md-6">
-	          <div> Something here </div>
 	        </div>
       	</div>
 		)

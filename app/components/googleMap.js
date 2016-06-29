@@ -153,10 +153,18 @@ var axios = require('axios');
 
     render: function () {
     	var style = {height: '500px', 
-    				width: '75%'
+    				width: '75%',
+                    margin: '1em'
     			}
         return (
-            <div ref="gmap" className='map-gic' style={style}></div>
+            <div>
+                <div className="col-md-6">
+                    <div ref="gmap" className='map-gic' style={style}></div>
+                </div>
+                <div className="col-md-6">
+                  <div> Something here </div>
+                </div>
+            </div>
             );
     }
 });
