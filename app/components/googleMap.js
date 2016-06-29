@@ -6,7 +6,8 @@ var axios = require('axios');
     getInitialState: function(){
     	return{
 
-        courts: []
+        courts: [],
+        name: ''
 
     	}
     },
@@ -122,6 +123,9 @@ var axios = require('axios');
 
            google.maps.event.addListener(marker, 'click', function() {
               infowindow.open(map,marker);
+              _this.setState({
+                name: _this.state.courts[j].name
+              }); 
             });
         		
         		bounds.extend(marker.getPosition());
@@ -151,7 +155,12 @@ var axios = require('axios');
         return new google.maps.LatLng(37.763108, -122.455799);
     },
 
+    display: function(){
+        return "Hello"
+    },
+
     render: function () {
+        var _this = this; 
     	var style = {height: '500px', 
     				width: '75%',
                     margin: '1em'
@@ -162,7 +171,7 @@ var axios = require('axios');
                     <div ref="gmap" className='map-gic' style={style}></div>
                 </div>
                 <div className="col-md-6">
-                  <div> Something here </div>
+                  <div> {_this.state.name}</div>
                 </div>
             </div>
             );
