@@ -6,10 +6,8 @@ var axios = require('axios');
     getInitialState: function(){
     	return{
 
-        courts: [],
+        
         name: 'Click a Marker to See Information About the Location',
-        type: '',
-        address: '',
         expanded: false 
 
     	}
@@ -105,12 +103,12 @@ var axios = require('axios');
                 
         		var marker = new google.maps.Marker({
         			position: points[j],
-                    icon: pinImage,
-                    shadow: pinShadow,
+              icon: pinImage,
+              shadow: pinShadow,
         			map: map
         		});
         		
-        		var contentString = '<div id="content" >'+ _this.state.courts[j].name +'">' +
+        		var contentString = '<div id="content" >'+ _this.state.courts[j].name +
             
             '<font color = "orange">'+ '<b>'+'<br>' + 
             '</b>'+ '<br>' + '</a>' +
@@ -130,12 +128,13 @@ var axios = require('axios');
               // then, remove the infowindows name from the array
             });
            google.maps.event.addListener(marker, 'click', function() {
+
               if(_this.state.expanded === false){
                 infowindow.open(map,marker);  
               
               
               // This is where the court data is set to the state of the app for display
-              
+              console.log("This is state ", _this.state.courts[j]);
               if(_this.state.courts[j].type === 'shop'){
                 _this.setState({
                   name: _this.state.courts[j].name,
@@ -158,7 +157,7 @@ var axios = require('axios');
                   wall: _this.state.courts[j].ClubWall,
                   grass: _this.state.courts[j].ClubGrass,
                   proShop: _this.state.courts[j].ClubProShop,
-                  courts: _this.state.courts[j].ClubCourts,
+                  courtNumber: _this.state.courts[j].ClubCourts,
                   clay: _this.state.courts[j].ClubClay,
                   indoor: _this.state.courts[j].ClubIndoor,
                   string: _this.state.courts[j].ClubStringing,
@@ -187,7 +186,7 @@ var axios = require('axios');
               
 
             }
-            
+
             });
 
             
@@ -227,7 +226,7 @@ var axios = require('axios');
       
       var dataShowing;
       
-      if(this.state.type == 'court' || this.state.type === 'other'){
+      if(this.state.type === 'court' || this.state.type === 'other'){
         dataShowing =  <ul>  
           <h3>Name:  {this.state.name}  </h3> 
           <li>Lights:  {this.state.lights}  </li> 
@@ -236,9 +235,35 @@ var axios = require('axios');
           <li>Y Coordinate:  {this.state.ycoord}  </li> 
         </ul>    
 
+      }else if(this.state.type === 'shop'){
+          dataShowing =  <ul>  
+          <h3>Name:  {this.state.name}  </h3> 
+          <li>Phone:  {this.state.phone}  </li> 
+          <li>Type:  {this.state.type}    </li> 
+          <li>Address: {this.state.address} </li>
+          <li>X Coordinate:  {this.state.xcoord}  </li> 
+          <li>Y Coordinate:  {this.state.ycoord}  </li> 
+        </ul>    
+      }else if(this.state.type === 'club'){
+          dataShowing =  <ul>  
+          <h3>Name:  {this.state.name}  </h3> 
+          <li>Address: {this.state.address} </li>
+          <li>Phone:  {this.state.phone}  </li> 
+          <li>Number of Courts:  {this.state.courtNumber} </li> 
+          <li>Lights:  {this.state.lights}  </li> 
+          <li>Wall:  {this.state.wall}    </li> 
+          <li>Grass Courts:  {this.state.grass}    </li> 
+          <li>Pro Shop:  {this.state.proShop}    </li> 
+          <li>Clay Courts:  {this.state.clay}    </li> 
+          <li>Indoor Courts:  {this.state.indoor}    </li> 
+          <li>Racquet Stringing:  {this.state.string}    </li> 
+          <li>X Coordinate:  {this.state.xcoord}  </li> 
+          <li>Y Coordinate:  {this.state.ycoord}  </li> 
+        </ul>    
+      }else{
+        dataShowing = <div> No Data </div>
       }
        
-
       
     	var style = {
             height: '500px', 
