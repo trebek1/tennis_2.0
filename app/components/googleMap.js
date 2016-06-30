@@ -7,7 +7,9 @@ var axios = require('axios');
     	return{
 
         courts: [],
-        name: ''
+        name: 'Click a Marker to See Information About the Location',
+        type: '',
+        address: ''
 
     	}
     },
@@ -79,9 +81,9 @@ var axios = require('axios');
                     return "26DFE9"
                 }else if(data.type === 'club'){
                     return "F8EC3B"
-                }else if (data.type === 'Court'){
+                }else if (data.type === 'court'){
                     return "3BF83E"
-                }else if (data.type === 'Other'){
+                }else if (data.type === 'other'){
                     return "DF7569"
                 }else{
                     return "FE7569"
@@ -123,9 +125,54 @@ var axios = require('axios');
 
            google.maps.event.addListener(marker, 'click', function() {
               infowindow.open(map,marker);
-              _this.setState({
-                name: _this.state.courts[j].name
-              }); 
+              
+              // This is where the court data is set to the state of the app for display
+              
+              if(_this.state.courts[j].type === 'shop'){
+                _this.setState({
+                  name: _this.state.courts[j].name,
+                  address: _this.state.courts[j].address,
+                  phone: _this.state.courts[j].phone,
+                  xcoord: _this.state.courts[j].xcoord,
+                  ycoord: _this.state.courts[j].ycoord,
+                  type: _this.state.courts[j].type
+                });   
+              }else if(_this.state.courts[j].type === 'club'){
+                _this.setState({
+                  name: _this.state.courts[j].name,
+                  address: _this.state.courts[j].address,
+                  phone: _this.state.courts[j].phone,
+                  xcoord: _this.state.courts[j].xcoord,
+                  ycoord: _this.state.courts[j].ycoord,
+                  lights: _this.state.courts[j].lights,
+                  type: _this.state.courts[j].type,
+                  wall: _this.state.courts[j].ClubWall,
+                  grass: _this.state.courts[j].ClubGrass,
+                  proShop: _this.state.courts[j].ClubProShop,
+                  courts: _this.state.courts[j].ClubCourts,
+                  clay: _this.state.courts[j].ClubClay,
+                  indoor: _this.state.courts[j].ClubIndoor,
+                  string: _this.state.courts[j].ClubStringing
+                }); 
+              
+              }else if(_this.state.courts[j].type === "court" || _this.state.courts[j].type === 'other'){
+                
+                _this.setState({
+                  name: _this.state.courts[j].name,
+                  address: _this.state.courts[j].address,
+                  xcoord: _this.state.courts[j].xcoord,
+                  ycoord: _this.state.courts[j].ycoord,
+                  lights: _this.state.courts[j].lights,
+                  type: _this.state.courts[j].type
+                });   
+              }else{
+                _this.setState({
+                  name: "An error has occured"
+                }); 
+              } 
+              
+
+
             });
         		
         		bounds.extend(marker.getPosition());
@@ -160,10 +207,25 @@ var axios = require('axios');
     },
 
     render: function () {
-        var _this = this; 
-    	var style = {height: '500px', 
+      console.log("This is state ", this.state);
+      var dataShowing;
+      //console.log("This type ", _this.state.type)
+        //if({this.state.type} === 'court' || {this.state.type} === 'other'){
+          //   console.log("here 3 ")
+          // dataShowing = '<ul>' + 
+          //                 '<li>' + {this.state.name} + '</li>' +
+          //                 '<li>' + {this.state.lights} + '</li>' +
+          //                 '<li>' + {this.state.type} +   '</li>' +
+          //                 '<li>' + {this.state.xcoord} + '</li>' +
+          //                 '<li>' + {this.state.ycoord} +  '</li>' +
+          //               '</ul>'    
+                        
+        //} 
+      
+    	var style = {
+            height: '500px', 
     				width: '75%',
-                    margin: '1em'
+            margin: '1em'
     			}
         return (
             <div>
@@ -171,7 +233,8 @@ var axios = require('axios');
                     <div ref="gmap" className='map-gic' style={style}></div>
                 </div>
                 <div className="col-md-6">
-                  <div> {_this.state.name}</div>
+                  <div> {dataShowing}</div>
+
                 </div>
             </div>
             );
