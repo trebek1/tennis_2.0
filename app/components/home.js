@@ -17,7 +17,7 @@ var Home = React.createClass({
 		<div className="row">
 			<nav className="navbar navbar-default" style={style} role="navigation">
 					<h1>
-						Tennis Courts
+						Tennis Courts in San Francisco
 					</h1>
 				</nav>
 	        <div>

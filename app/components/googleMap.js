@@ -9,7 +9,8 @@ var axios = require('axios');
         courts: [],
         name: 'Click a Marker to See Information About the Location',
         type: '',
-        address: ''
+        address: '',
+        expanded: false 
 
     	}
     },
@@ -122,9 +123,16 @@ var axios = require('axios');
           content: contentString
           });
 
-
+          google.maps.event.addListener(infowindow,'closeclick',function(){
+              _this.setState({
+                expanded: false 
+              }); //removes the marker
+              // then, remove the infowindows name from the array
+            });
            google.maps.event.addListener(marker, 'click', function() {
-              infowindow.open(map,marker);
+              if(_this.state.expanded === false){
+                infowindow.open(map,marker);  
+              
               
               // This is where the court data is set to the state of the app for display
               
@@ -135,7 +143,8 @@ var axios = require('axios');
                   phone: _this.state.courts[j].phone,
                   xcoord: _this.state.courts[j].xcoord,
                   ycoord: _this.state.courts[j].ycoord,
-                  type: _this.state.courts[j].type
+                  type: _this.state.courts[j].type,
+                  expanded: true
                 });   
               }else if(_this.state.courts[j].type === 'club'){
                 _this.setState({
@@ -152,7 +161,8 @@ var axios = require('axios');
                   courts: _this.state.courts[j].ClubCourts,
                   clay: _this.state.courts[j].ClubClay,
                   indoor: _this.state.courts[j].ClubIndoor,
-                  string: _this.state.courts[j].ClubStringing
+                  string: _this.state.courts[j].ClubStringing,
+                  expanded: true
                 }); 
               
               }else if(_this.state.courts[j].type === "court" || _this.state.courts[j].type === 'other'){
@@ -163,17 +173,24 @@ var axios = require('axios');
                   xcoord: _this.state.courts[j].xcoord,
                   ycoord: _this.state.courts[j].ycoord,
                   lights: _this.state.courts[j].lights,
-                  type: _this.state.courts[j].type
+                  type: _this.state.courts[j].type,
+                  expanded: true
+                  
+                      
                 });   
               }else{
                 _this.setState({
-                  name: "An error has occured"
+                  name: "An error has occured",
+                  expanded: true
                 }); 
               } 
               
 
-
+            }
+            
             });
+
+            
         		
         		bounds.extend(marker.getPosition());
         		map.setCenter(bounds.getCenter());
@@ -207,20 +224,21 @@ var axios = require('axios');
     },
 
     render: function () {
-      console.log("This is state ", this.state);
+      
       var dataShowing;
-      //console.log("This type ", _this.state.type)
-        //if({this.state.type} === 'court' || {this.state.type} === 'other'){
-          //   console.log("here 3 ")
-          // dataShowing = '<ul>' + 
-          //                 '<li>' + {this.state.name} + '</li>' +
-          //                 '<li>' + {this.state.lights} + '</li>' +
-          //                 '<li>' + {this.state.type} +   '</li>' +
-          //                 '<li>' + {this.state.xcoord} + '</li>' +
-          //                 '<li>' + {this.state.ycoord} +  '</li>' +
-          //               '</ul>'    
-                        
-        //} 
+      
+      if(this.state.type == 'court' || this.state.type === 'other'){
+        dataShowing =  <ul>  
+          <h3>Name:  {this.state.name}  </h3> 
+          <li>Lights:  {this.state.lights}  </li> 
+          <li>Type:  {this.state.type}    </li> 
+          <li>X Coordinate:  {this.state.xcoord}  </li> 
+          <li>Y Coordinate:  {this.state.ycoord}  </li> 
+        </ul>    
+
+      }
+       
+
       
     	var style = {
             height: '500px', 
