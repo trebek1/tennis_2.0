@@ -1,5 +1,6 @@
 var React = require('react');
 var axios = require('axios');
+var MiniMap = require('./miniMap');
 
  var GoogleMap = React.createClass({
     
@@ -8,7 +9,10 @@ var axios = require('axios');
 
         
         name: 'Click a Marker to See Information About the Location',
-        expanded: false 
+        expanded: false,
+        xcoord: 37.763108,
+        ycoord: -122.455799
+
 
     	}
     },
@@ -107,27 +111,8 @@ var axios = require('axios');
               shadow: pinShadow,
         			map: map
         		});
-        		
-        		var contentString = '<div id="content" >'+ _this.state.courts[j].name +
-            
-            '<font color = "orange">'+ '<b>'+'<br>' + 
-            '</b>'+ '<br>' + '</a>' +
-            'lat: ' + _this.state.courts[j].xcoord + ' lng: ' + _this.state.courts[j].ycoord + 
-            '<br>' + '</font>'+
-            '</div>';
-            
-          // Create new info window - Popup with street location and the title of the movie 
-          var infowindow = new google.maps.InfoWindow({
-          content: contentString
-          });
 
-          google.maps.event.addListener(infowindow,'closeclick',function(){
-              _this.setState({
-                expanded: false 
-              }); //removes the marker
-              // then, remove the infowindows name from the array
-            });
-           google.maps.event.addListener(marker, 'click', function() {
+            google.maps.event.addListener(marker, 'click', function() {
 
               if(_this.state.expanded === false){
                 infowindow.open(map,marker);  
@@ -188,6 +173,30 @@ var axios = require('axios');
             }
 
             });
+        		
+        		var contentString = '<div id="content" >'+ _this.state.courts[j].name +
+            
+            '<font color = "orange">'+ '<b>'+'<br>' + 
+            '</b>'+ '<br>' + '</a>' +
+            'lat: ' + _this.state.courts[j].xcoord + ' lng: ' + _this.state.courts[j].ycoord + 
+            '<br>' + '</font>'+
+            '</div>';
+            console.log("I am here")
+          
+
+
+          // Create new info window - Popup with street location and the title of the movie 
+          var infowindow = new google.maps.InfoWindow({
+          content: contentString
+          });
+
+          google.maps.event.addListener(infowindow,'closeclick',function(){
+              _this.setState({
+                expanded: false 
+              }); //removes the marker
+              // then, remove the infowindows name from the array
+            });
+           
 
             
         		
@@ -228,7 +237,7 @@ var axios = require('axios');
       
       if(this.state.type === 'court' || this.state.type === 'other'){
         dataShowing =  <ul>  
-          <h3>Name:  {this.state.name}  </h3> 
+          <h3>{this.state.name}  </h3> 
           <li>Lights:  {this.state.lights}  </li> 
           <li>Type:  {this.state.type}    </li> 
           <li>X Coordinate:  {this.state.xcoord}  </li> 
@@ -237,7 +246,7 @@ var axios = require('axios');
 
       }else if(this.state.type === 'shop'){
           dataShowing =  <ul>  
-          <h3>Name:  {this.state.name}  </h3> 
+          <h3>{this.state.name}  </h3> 
           <li>Phone:  {this.state.phone}  </li> 
           <li>Type:  {this.state.type}    </li> 
           <li>Address: {this.state.address} </li>
@@ -246,7 +255,7 @@ var axios = require('axios');
         </ul>    
       }else if(this.state.type === 'club'){
           dataShowing =  <ul>  
-          <h3>Name:  {this.state.name}  </h3> 
+          <h3>{this.state.name}  </h3> 
           <li>Address: {this.state.address} </li>
           <li>Phone:  {this.state.phone}  </li> 
           <li>Number of Courts:  {this.state.courtNumber} </li> 
@@ -261,7 +270,7 @@ var axios = require('axios');
           <li>Y Coordinate:  {this.state.ycoord}  </li> 
         </ul>    
       }else{
-        dataShowing = <div> No Data </div>
+        dataShowing = <div> <h3> Select a Marker on the Map to Learn More about that Tennis Facility </h3> </div>
       }
        
       
@@ -270,6 +279,9 @@ var axios = require('axios');
     				width: '75%',
             margin: '1em'
     			}
+          var xc = this.state.xcoord; 
+          var yc = this.state.ycoord; 
+
         return (
             <div>
                 <div className="col-md-6">
@@ -277,6 +289,7 @@ var axios = require('axios');
                 </div>
                 <div className="col-md-6">
                   <div> {dataShowing}</div>
+                  <MiniMap xcoord={xc} ycoord = {yc} selected = {this.state.expanded}/>
 
                 </div>
             </div>
