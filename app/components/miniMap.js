@@ -14,41 +14,72 @@ var React = require('react');
     },
     
     componentDidMount: function () {
+
+    var _this = this; 
+
+    var sv = new google.maps.StreetViewService();
+    var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'));
+
+    function processSVData(data, status) {
+      if (status == google.maps.StreetViewStatus.OK) {
+        var marker = new google.maps.Marker({
+          position: data.location.latLng,
+          map: map,
+          title: data.location.description
+        });
+
+        panorama.setPano(data.location.pano);
+        panorama.setPov({
+          heading: 270,
+          pitch: 0
+        });
+        panorama.setVisible(true);
+
+        google.maps.event.addListener(marker, 'click', function() {
+
+          var markerPanoID = data.location.pano;
+          // Set the Pano to use the passed panoID
+          panorama.setPano(markerPanoID);
+          panorama.setPov({
+            heading: 270,
+            pitch: 0
+          });
+          panorama.setVisible(true);
+        });
+      } else {
+        alert('Street View data not found for this location.');
+      }
+    }
     	
         var mapOptions = {
                 center: this.mapCenterLatLng(),
                 zoom: this.props.initialZoom
             },
             map = new google.maps.Map(this.refs.maps, mapOptions);
+
         var marker = new google.maps.Marker({position: this.mapCenterLatLng(), title: 'Hi', map: map});
+
+          sv.getPanoramaByLocation(_this.mapCenterLatLng(), 50, processSVData);
+      
         
     },
     mapCenterLatLng: function () {
         var props = this.props;
-        console.log("XXXXXXXX")
+        
 
         return new google.maps.LatLng(this.props.xcoord, this.props.ycoord);
     },
     render: function () {
-        console.log("render is run!")
-    	var style; 
+    	var style = {
+                height: '250px', 
+                width: '50%', 
+                float: 'left'    
+            };  
     	
-    	if(!this.props.selected && this.props.xcoord === 37.763108){
-    		style = {
-				height: '300px', 
-				width: '50%'
-				
-    		};	
-    	}else{
-    		style = {
-				height: '300px', 
-				width: '50%'
-				
-    		};	
-    	}
     	
         return (<div>
         			<div className='map-gic' ref='maps' style={style}></div>
+                    <div id="pano" style={style}></div>
         		</div>
             
             );
