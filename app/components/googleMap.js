@@ -281,13 +281,11 @@ var MiniMap = require('./miniMap');
     				width: '75%',
             margin: '1em'
     			}
-          var xc = this.state.xcoord; 
-          var yc = this.state.ycoord; 
 
         return (
             <div>
                 <div className="col-md-7">
-                    <div ref="gmap" className='map-gic' style={style}></div>
+                    <div ref="gmap" className='map-gic main-map' style={style}></div>
                 </div>
                 <div className="col-md-5">
                   <div> {dataShowing}</div>

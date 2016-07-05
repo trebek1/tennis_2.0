@@ -7,13 +7,11 @@ var courts = [];
 var Home = React.createClass({
 	
 	render: function(){
-		var style = {
-			textAlign: 'center'
-		}
+		
 		return(
 		<div className="row">
-			<nav className="navbar navbar-default" style={style} role="navigation">
-					<h1>
+			<nav className="navbar navbar-default" role="navigation">
+					<h1 className="main-heading">
 						Tennis Courts in San Francisco
 					</h1>
 				</nav>

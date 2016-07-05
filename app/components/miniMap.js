@@ -71,17 +71,17 @@ var React = require('react');
         return new google.maps.LatLng(this.props.xcoord, this.props.ycoord);
     },
     render: function () {
-    	var style = {
+    	
+      var style = {
                 height: '250px', 
                 width: '50%', 
                 float: 'left'    
-            };  
+      };  
 
-        var componentStyle = {
-            margin: '1em'
+      var componentStyle = {
+          margin: '1em'
 
-        }
-    	
+      };
     	
         return (<div style = {componentStyle}>
         			<div className='map-gic' ref='maps' style={style}></div>
