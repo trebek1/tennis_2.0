@@ -50,14 +50,15 @@ var React = require('react');
         alert('Street View data not found for this location.');
       }
     }
-    	
+    	var styles = [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#3a3a3a"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"lightness":20}]},{"featureType":"administrative","elementType":"labels","stylers":[{"visibility":"on"},{"saturation":"0"},{"lightness":"100"},{"color":"#ffffff"}]},{"featureType":"administrative","elementType":"labels.text.stroke","stylers":[{"visibility":"off"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"}]},{"featureType":"landscape.natural.landcover","elementType":"labels.text.fill","stylers":[{"lightness":"-37"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"weight":0.2},{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"lightness":"34"},{"color":"#e74110"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#090909"},{"lightness":16}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"}]},{"featureType":"water","elementType":"geometry","stylers":[{"lightness":17},{"color":"#1a1a1a"}]}]; 
         var mapOptions = {
                 center: this.mapCenterLatLng(),
-                zoom: this.props.initialZoom
+                zoom: this.props.initialZoom,
+                styles: styles 
             },
             map = new google.maps.Map(this.refs.maps, mapOptions);
 
-        var marker = new google.maps.Marker({position: this.mapCenterLatLng(), title: 'Hi', map: map});
+        //var marker = new google.maps.Marker({position: this.mapCenterLatLng(), title: 'Hi', map: map});
 
           sv.getPanoramaByLocation(_this.mapCenterLatLng(), 50, processSVData);
       
@@ -75,9 +76,14 @@ var React = require('react');
                 width: '50%', 
                 float: 'left'    
             };  
+
+        var componentStyle = {
+            margin: '1em'
+
+        }
     	
     	
-        return (<div>
+        return (<div style = {componentStyle}>
         			<div className='map-gic' ref='maps' style={style}></div>
                     <div id="pano" style={style}></div>
         		</div>
