@@ -23,8 +23,7 @@ var MiniMap = require('./miniMap');
         var _this = this; 
         this.ref = new Firebase('https://sftennisapp.firebaseio.com')
         this.ref.once("value", function(snapshot) {
-            //console.log("take the shot ", snapshot.val().sfcourts[0]);
-            console.log("this is snapshot ", snapshot.val());
+            
             _this.setState({
                 courts: snapshot.val().sfcourts
             });
@@ -114,13 +113,16 @@ var MiniMap = require('./miniMap');
         		});
 
             google.maps.event.addListener(marker, 'click', function() {
-
+                _this.setState({
+                  mini: null
+                });
+                
               if(_this.state.expanded === false){
                 infowindow.open(map,marker);  
               
               
               // This is where the court data is set to the state of the app for display
-              console.log("This is state ", _this.state.courts[j]);
+              
               if(_this.state.courts[j].type === 'shop'){
                 _this.setState({
                   name: _this.state.courts[j].name,
@@ -185,10 +187,7 @@ var MiniMap = require('./miniMap');
             'lat: ' + _this.state.courts[j].xcoord + ' lng: ' + _this.state.courts[j].ycoord + 
             '<br>' + '</font>'+
             '</div>';
-            console.log("I am here")
           
-
-
           // Create new info window - Popup with street location and the title of the movie 
           var infowindow = new google.maps.InfoWindow({
           content: contentString
