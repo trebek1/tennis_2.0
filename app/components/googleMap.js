@@ -11,7 +11,8 @@ var MiniMap = require('./miniMap');
         name: 'Click a Marker to See Information About the Location',
         expanded: false,
         xcoord: 37.763108,
-        ycoord: -122.455799
+        ycoord: -122.455799,
+        mini: null
 
 
     	}
@@ -128,6 +129,7 @@ var MiniMap = require('./miniMap');
                   xcoord: _this.state.courts[j].xcoord,
                   ycoord: _this.state.courts[j].ycoord,
                   type: _this.state.courts[j].type,
+                  mini: <MiniMap xcoord = {_this.state.courts[j].xcoord} ycoord = {_this.state.courts[j].ycoord}/>, 
                   expanded: true
                 });   
               }else if(_this.state.courts[j].type === 'club'){
@@ -146,6 +148,7 @@ var MiniMap = require('./miniMap');
                   clay: _this.state.courts[j].ClubClay,
                   indoor: _this.state.courts[j].ClubIndoor,
                   string: _this.state.courts[j].ClubStringing,
+                  mini: <MiniMap xcoord = {_this.state.courts[j].xcoord} ycoord = {_this.state.courts[j].ycoord}/>, 
                   expanded: true
                 }); 
               
@@ -158,6 +161,7 @@ var MiniMap = require('./miniMap');
                   ycoord: _this.state.courts[j].ycoord,
                   lights: _this.state.courts[j].lights,
                   type: _this.state.courts[j].type,
+                  mini: <MiniMap xcoord = {_this.state.courts[j].xcoord} ycoord = {_this.state.courts[j].ycoord}/>, 
                   expanded: true
                   
                       
@@ -289,7 +293,9 @@ var MiniMap = require('./miniMap');
                 </div>
                 <div className="col-md-6">
                   <div> {dataShowing}</div>
-                  <MiniMap xcoord={xc} ycoord = {yc} selected = {this.state.expanded}/>
+                  <div id='abc'>
+                    {this.state.mini}
+                  </div>
 
                 </div>
             </div>

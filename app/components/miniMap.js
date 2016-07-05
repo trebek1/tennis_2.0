@@ -51,7 +51,7 @@ var React = require('react');
         var props = this.props;
 
 
-        return new google.maps.LatLng(this.state.xcoord, this.state.ycoord);
+        return new google.maps.LatLng(this.props.xcoord, this.props.ycoord);
     },
     render: function () {
         console.log("render is run!")
@@ -60,8 +60,8 @@ var React = require('react');
     	if(!this.props.selected && this.props.xcoord === 37.763108){
     		style = {
 				height: '300px', 
-				width: '50%',
-				visibility: 'hidden'
+				width: '50%'
+				
     		};	
     	}else{
     		style = {
