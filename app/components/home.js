@@ -2,7 +2,6 @@ var React = require('react');
 var ReactFireMixin = require('reactfire')
 var Firebase = require('firebase');
 var helpers = require('../../utils/helpers');
-var axios = require('axios');
 var Map = require('./googleMap'); 
 
 var courts = []; 

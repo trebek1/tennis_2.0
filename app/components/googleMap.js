@@ -1,5 +1,4 @@
 var React = require('react');
-var axios = require('axios');
 var MiniMap = require('./miniMap');
 
  var GoogleMap = React.createClass({
@@ -87,7 +86,7 @@ var MiniMap = require('./miniMap');
                 }else if (data.type === 'court'){
                     return "3BF83E"
                 }else if (data.type === 'other'){
-                    return "DF7569"
+                    return "DF7920"
                 }else{
                     return "FE7569"
                 }

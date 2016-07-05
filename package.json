@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "dist": "webpack -p",
+  "postinstall": "npm run dist",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.8.0",
     "firebase": "^2.3.2",
     "history": "^1.13.1",
     "react": "^0.14.3",
