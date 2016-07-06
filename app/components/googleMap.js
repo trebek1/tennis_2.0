@@ -202,6 +202,14 @@ var MiniMap = require('./miniMap');
               // then, remove the infowindows name from the array
             });
            
+           google.maps.event.addListener(map,'click',function(){
+            
+              infowindow.close(map,marker); 
+              _this.setState({
+                expanded: false 
+              }); //removes the marker
+              // then, remove the infowindows name from the array
+            });
 
             
         		
@@ -274,7 +282,6 @@ var MiniMap = require('./miniMap');
               <li>Wall:  {this.state.wall}    </li> 
               <li>Grass Courts:  {this.state.grass}    </li> 
             </ul>
-
             <ul className="col-xs-6">
               <li>Pro Shop:  {this.state.proShop}    </li> 
               <li>Clay Courts:  {this.state.clay}    </li> 
@@ -283,9 +290,7 @@ var MiniMap = require('./miniMap');
               <li>X Coordinate:  {this.state.xcoord}  </li> 
               <li>Y Coordinate:  {this.state.ycoord}  </li> 
             </ul>
-
-          </div>
-          
+          </div>   
         </div>    
       }else{
         dataShowing = <div> <h3> Select a Marker on the Map to Learn More about that Tennis Facility </h3> </div>
@@ -300,9 +305,6 @@ var MiniMap = require('./miniMap');
       var testStyle = {
             height: '250px', 
             width: '100%'
-            
-
-            
       }
 
         return (
@@ -312,7 +314,7 @@ var MiniMap = require('./miniMap');
                 </div>
                 <div className="col-md-6">
                   <div style = {testStyle}> {dataShowing}</div>
-                  <div id='abc'>
+                  <div>
                     {this.state.mini}
                   </div>
 
