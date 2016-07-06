@@ -301,10 +301,12 @@ var MiniMap = require('./miniMap');
             height: '500px', 
     				width: '100%',
             margin: '0 auto 0 auto'
+          
     			}
       var testStyle = {
             height: '250px', 
-            width: '100%'
+            width: '100%',
+            color: 'black'
       }
 
         return (
