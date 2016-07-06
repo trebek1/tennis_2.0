@@ -112,11 +112,15 @@ var MiniMap = require('./miniMap');
         		});
 
             google.maps.event.addListener(marker, 'click', function() {
-                _this.setState({
+                
+
+              if(_this.state.expanded === false){
+               
+                 _this.setState({
                   mini: null
                 });
+              
                 
-              if(_this.state.expanded === false){
                 infowindow.open(map,marker);  
               
               
