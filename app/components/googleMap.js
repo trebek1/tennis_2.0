@@ -260,19 +260,23 @@ var MiniMap = require('./miniMap');
         </ul>    
       }else if(this.state.type === 'club'){
           dataShowing =  <ul>  
-          <h3>{this.state.name}  </h3> 
-          <li>Address: {this.state.address} </li>
-          <li>Phone:  {this.state.phone}  </li> 
-          <li>Number of Courts:  {this.state.courtNumber} </li> 
-          <li>Lights:  {this.state.lights}  </li> 
-          <li>Wall:  {this.state.wall}    </li> 
-          <li>Grass Courts:  {this.state.grass}    </li> 
-          <li>Pro Shop:  {this.state.proShop}    </li> 
-          <li>Clay Courts:  {this.state.clay}    </li> 
-          <li>Indoor Courts:  {this.state.indoor}    </li> 
-          <li>Racquet Stringing:  {this.state.string}    </li> 
-          <li>X Coordinate:  {this.state.xcoord}  </li> 
-          <li>Y Coordinate:  {this.state.ycoord}  </li> 
+          <h3>{this.state.name}  </h3>
+          <div className="col-md-6">
+            <li>Address: {this.state.address} </li>
+            <li>Phone:  {this.state.phone}  </li> 
+            <li>Number of Courts:  {this.state.courtNumber} </li> 
+            <li>Lights:  {this.state.lights}  </li> 
+            <li>Wall:  {this.state.wall}    </li> 
+            <li>Grass Courts:  {this.state.grass}    </li> 
+          </div>
+          <div className="col-md-6"> 
+            <li>Pro Shop:  {this.state.proShop}    </li> 
+            <li>Clay Courts:  {this.state.clay}    </li> 
+            <li>Indoor Courts:  {this.state.indoor}    </li> 
+            <li>Racquet Stringing:  {this.state.string}    </li> 
+            <li>X Coordinate:  {this.state.xcoord}  </li> 
+            <li>Y Coordinate:  {this.state.ycoord}  </li> 
+          </div>
         </ul>    
       }else{
         dataShowing = <div> <h3> Select a Marker on the Map to Learn More about that Tennis Facility </h3> </div>
@@ -284,6 +288,11 @@ var MiniMap = require('./miniMap');
     				width: '100%',
             margin: '1em'
     			}
+      var testStyle = {
+            height: '250px', 
+            width: '100%'
+            
+      }
 
         return (
             <div className="test">
@@ -291,7 +300,7 @@ var MiniMap = require('./miniMap');
                     <div ref="gmap" className='map-gic main-map' style={style}></div>
                 </div>
                 <div className="col-md-6">
-                  <div> {dataShowing}</div>
+                  <div style = {testStyle}> {dataShowing}</div>
                   <div id='abc'>
                     {this.state.mini}
                   </div>

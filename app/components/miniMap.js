@@ -73,7 +73,7 @@ var React = require('react');
     render: function () {
     	
       var style = {
-                height: '250px', 
+                height: '230px', 
                 width: '50%', 
                 float: 'left'    
       };  
