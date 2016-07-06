@@ -241,43 +241,51 @@ var MiniMap = require('./miniMap');
       var dataShowing;
       
       if(this.state.type === 'court' || this.state.type === 'other'){
-        dataShowing =  <ul>  
+        dataShowing =  <div>  
           <h3>{this.state.name}  </h3> 
-          <li>Lights:  {this.state.lights}  </li> 
-          <li>Type:  {this.state.type}    </li> 
-          <li>X Coordinate:  {this.state.xcoord}  </li> 
-          <li>Y Coordinate:  {this.state.ycoord}  </li> 
-        </ul>    
-
-      }else if(this.state.type === 'shop'){
-          dataShowing =  <ul>  
-          <h3>{this.state.name}  </h3> 
-          <li>Phone:  {this.state.phone}  </li> 
-          <li>Type:  {this.state.type}    </li> 
-          <li>Address: {this.state.address} </li>
-          <li>X Coordinate:  {this.state.xcoord}  </li> 
-          <li>Y Coordinate:  {this.state.ycoord}  </li> 
-        </ul>    
-      }else if(this.state.type === 'club'){
-          dataShowing =  <ul>  
-          <h3>{this.state.name}  </h3>
-          <div className="col-md-6">
-            <li>Address: {this.state.address} </li>
-            <li>Phone:  {this.state.phone}  </li> 
-            <li>Number of Courts:  {this.state.courtNumber} </li> 
+          <ul>
             <li>Lights:  {this.state.lights}  </li> 
-            <li>Wall:  {this.state.wall}    </li> 
-            <li>Grass Courts:  {this.state.grass}    </li> 
-          </div>
-          <div className="col-md-6"> 
-            <li>Pro Shop:  {this.state.proShop}    </li> 
-            <li>Clay Courts:  {this.state.clay}    </li> 
-            <li>Indoor Courts:  {this.state.indoor}    </li> 
-            <li>Racquet Stringing:  {this.state.string}    </li> 
+            <li>Type:  {this.state.type}    </li> 
             <li>X Coordinate:  {this.state.xcoord}  </li> 
             <li>Y Coordinate:  {this.state.ycoord}  </li> 
+          </ul>
+        </div>    
+
+      }else if(this.state.type === 'shop'){
+          dataShowing =  <div>  
+          <h3>{this.state.name}  </h3> 
+          <ul>
+            <li>Phone:  {this.state.phone}  </li> 
+            <li>Type:  {this.state.type}    </li> 
+            <li>Address: {this.state.address} </li>
+            <li>X Coordinate:  {this.state.xcoord}  </li> 
+            <li>Y Coordinate:  {this.state.ycoord}  </li> 
+          </ul>
+        </div>    
+      }else if(this.state.type === 'club'){
+          dataShowing =  <div>  
+          <h3>{this.state.name}  </h3>
+          <div className="col-md-6">
+            <ul>
+              <li>Address: {this.state.address} </li>
+              <li>Phone:  {this.state.phone}  </li> 
+              <li>Number of Courts:  {this.state.courtNumber} </li> 
+              <li>Lights:  {this.state.lights}  </li> 
+              <li>Wall:  {this.state.wall}    </li> 
+              <li>Grass Courts:  {this.state.grass}    </li> 
+            </ul>
           </div>
-        </ul>    
+          <div className="col-md-6"> 
+            <ul>
+              <li>Pro Shop:  {this.state.proShop}    </li> 
+              <li>Clay Courts:  {this.state.clay}    </li> 
+              <li>Indoor Courts:  {this.state.indoor}    </li> 
+              <li>Racquet Stringing:  {this.state.string}    </li> 
+              <li>X Coordinate:  {this.state.xcoord}  </li> 
+              <li>Y Coordinate:  {this.state.ycoord}  </li> 
+            </ul>
+          </div>
+        </div>    
       }else{
         dataShowing = <div> <h3> Select a Marker on the Map to Learn More about that Tennis Facility </h3> </div>
       }
