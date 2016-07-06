@@ -265,8 +265,8 @@ var MiniMap = require('./miniMap');
       }else if(this.state.type === 'club'){
           dataShowing =  <div>  
           <h3>{this.state.name}  </h3>
-          <div className="col-md-6">
-            <ul>
+          <div className = 'container-fluid'>
+            <ul className="col-xs-6">
               <li>Address: {this.state.address} </li>
               <li>Phone:  {this.state.phone}  </li> 
               <li>Number of Courts:  {this.state.courtNumber} </li> 
@@ -274,9 +274,8 @@ var MiniMap = require('./miniMap');
               <li>Wall:  {this.state.wall}    </li> 
               <li>Grass Courts:  {this.state.grass}    </li> 
             </ul>
-          </div>
-          <div className="col-md-6"> 
-            <ul>
+
+            <ul className="col-xs-6">
               <li>Pro Shop:  {this.state.proShop}    </li> 
               <li>Clay Courts:  {this.state.clay}    </li> 
               <li>Indoor Courts:  {this.state.indoor}    </li> 
@@ -284,7 +283,9 @@ var MiniMap = require('./miniMap');
               <li>X Coordinate:  {this.state.xcoord}  </li> 
               <li>Y Coordinate:  {this.state.ycoord}  </li> 
             </ul>
+
           </div>
+          
         </div>    
       }else{
         dataShowing = <div> <h3> Select a Marker on the Map to Learn More about that Tennis Facility </h3> </div>
@@ -299,6 +300,8 @@ var MiniMap = require('./miniMap');
       var testStyle = {
             height: '250px', 
             width: '100%'
+            
+
             
       }
 
