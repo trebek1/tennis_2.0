@@ -286,7 +286,7 @@ var MiniMap = require('./miniMap');
     	var style = {
             height: '500px', 
     				width: '100%',
-            margin: '1em'
+            margin: '0 auto 0 auto'
     			}
       var testStyle = {
             height: '250px', 
