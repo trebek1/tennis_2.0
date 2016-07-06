@@ -50,11 +50,10 @@ var MiniMap = require('./miniMap');
           
           // Add the text
           controlText.innerHTML = '<b><center> Map Key </center></b><br />' +
-            '<img src="http://maps.google.com/mapfiles/ms/micons/red-dot.png" /> Center of SF <br />' +
-            '<img src="http://maps.google.com/mapfiles/ms/micons/yellow-dot.png" /> Tennis Club<br />' +
-            '<img src="http://maps.google.com/mapfiles/ms/micons/green-dot.png" /> Public Tennis Court<br />' +
-            '<img src="http://maps.google.com/mapfiles/ms/micons/blue-dot.png" /> Tennis Shop<br />' +
-            '<img src="http://maps.google.com/mapfiles/ms/micons/orange-dot.png" /> Other Facility <br />';
+            '<img src="http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|F8EC3B" /> Tennis Club<br />' +
+            '<img src="http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|3BF83E" /> Public Tennis Court<br />' +
+            '<img src="http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|FE7569"/> Tennis Shop<br />' +
+            '<img src="http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|00ccff" /> Other Facility <br />';
           controlUI.appendChild(controlText); 
         }
 
@@ -80,13 +79,13 @@ var MiniMap = require('./miniMap');
             function getPinColor(data){
             
                 if(data.type === 'shop'){
-                    return "26DFE9"
+                    return "FE7569"
                 }else if(data.type === 'club'){
                     return "F8EC3B"
                 }else if (data.type === 'court'){
                     return "3BF83E"
                 }else if (data.type === 'other'){
-                    return "DF7920"
+                    return "00ccff"
                 }else{
                     return "FE7569"
                 }
@@ -120,7 +119,7 @@ var MiniMap = require('./miniMap');
                   mini: null
                 });
               
-                
+
                 infowindow.open(map,marker);  
               
               
