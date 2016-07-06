@@ -9,7 +9,7 @@ var Home = React.createClass({
 	render: function(){
 		
 		return(
-		<div className="row">
+		<div>
 			<nav className="navbar navbar-default" role="navigation">
 					<h1 className="main-heading">
 						Tennis Courts in San Francisco

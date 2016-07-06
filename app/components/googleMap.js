@@ -278,16 +278,16 @@ var MiniMap = require('./miniMap');
       
     	var style = {
             height: '500px', 
-    				width: '75%',
+    				width: '100%',
             margin: '1em'
     			}
 
         return (
-            <div>
-                <div className="col-md-7">
+            <div className="test">
+                <div className="col-md-6">
                     <div ref="gmap" className='map-gic main-map' style={style}></div>
                 </div>
-                <div className="col-md-5">
+                <div className="col-md-6">
                   <div> {dataShowing}</div>
                   <div id='abc'>
                     {this.state.mini}
