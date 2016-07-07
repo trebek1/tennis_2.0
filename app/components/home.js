@@ -10,8 +10,8 @@ var Home = React.createClass({
 		
 		return(
 		<div>
-			<nav className="navbar navbar-default" role="navigation">
-					<h1 className="main-heading">
+			<nav className="navbar navbar-default main-heading" role="navigation">
+					<h1>
 						Tennis Courts in San Francisco
 					</h1>
 				</nav>

@@ -306,7 +306,8 @@ var MiniMap = require('./miniMap');
       var testStyle = {
             height: '250px', 
             width: '100%',
-            color: 'black'
+            color: 'black',
+            backgroundColor: '#e3e0cf;'
       }
 
         return (
