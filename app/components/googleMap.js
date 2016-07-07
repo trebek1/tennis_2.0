@@ -186,7 +186,7 @@ var MiniMap = require('./miniMap');
             
             '<font color = "orange">'+ '<b>'+'<br>' + 
             '</b>'+ '<br>' + '</a>' +
-            'lat: ' + _this.state.courts[j].xcoord + ' lng: ' + _this.state.courts[j].ycoord + 
+            'Address: ' + _this.state.courts[j].address 
             '<br>' + '</font>'+
             '</div>';
           
@@ -256,6 +256,7 @@ var MiniMap = require('./miniMap');
             <li>Type:  {this.state.type}    </li> 
             <li>X Coordinate:  {this.state.xcoord}  </li> 
             <li>Y Coordinate:  {this.state.ycoord}  </li> 
+            <li> Implied Address:  {this.state.address}  </li> 
           </ul>
         </div>    
 
@@ -268,6 +269,7 @@ var MiniMap = require('./miniMap');
             <li>Address: {this.state.address} </li>
             <li>X Coordinate:  {this.state.xcoord}  </li> 
             <li>Y Coordinate:  {this.state.ycoord}  </li> 
+            <li> Implied Address:  {this.state.address}  </li> 
           </ul>
         </div>    
       }else if(this.state.type === 'club'){
