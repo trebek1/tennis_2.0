@@ -182,12 +182,12 @@ var MiniMap = require('./miniMap');
 
             });
         		
-        		var contentString = '<div id="content" >'+ _this.state.courts[j].name +
+        		var contentString = '<div id="content"><font color = "orange">'+ _this.state.courts[j].name +
             
-            '<font color = "orange">'+ '<b>'+'<br>' + 
-            '</b>'+ '<br>' + '</a>' +
+            '<br/>'+
+            '<br/>'+
             'Address: ' + _this.state.courts[j].address 
-            '<br>' + '</font>'+
+            '</font>'+
             '</div>';
           
           // Create new info window - Popup with street location and the title of the movie 
@@ -309,7 +309,7 @@ var MiniMap = require('./miniMap');
             height: '250px', 
             width: '100%',
             color: 'black',
-            backgroundColor: '#e3e0cf;'
+            backgroundColor: '#e3e0cf'
       }
 
         return (
