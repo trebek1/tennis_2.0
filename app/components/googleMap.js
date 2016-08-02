@@ -5,28 +5,23 @@ var MiniMap = require('./miniMap');
     
     getInitialState: function(){
     	return{
-
-        
-        name: 'Click a Marker to See Information About the Location',
-        expanded: false,
-        xcoord: 37.763108,
-        ycoord: -122.455799,
-        mini: null
-
-
+          name: 'Click a Marker to See Information About the Location',
+          expanded: false,
+          xcoord: 37.763108,
+          ycoord: -122.455799,
+          mini: null
     	}
     },
     componentDidMount: function (rootNode) {
         var styles = [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#3a3a3a"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"lightness":20}]},{"featureType":"administrative","elementType":"labels","stylers":[{"visibility":"on"},{"saturation":"0"},{"lightness":"100"},{"color":"#ffffff"}]},{"featureType":"administrative","elementType":"labels.text.stroke","stylers":[{"visibility":"off"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"}]},{"featureType":"landscape.natural.landcover","elementType":"labels.text.fill","stylers":[{"lightness":"-37"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"weight":0.2},{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"lightness":"34"},{"color":"#e74110"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#090909"},{"lightness":16}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"}]},{"featureType":"water","elementType":"geometry","stylers":[{"lightness":17},{"color":"#1a1a1a"}]}]; 
         var courts; 
+        var points = [];
         var _this = this; 
-        this.ref = new Firebase('https://sftennisapp.firebaseio.com')
+        this.ref = new Firebase('https://sftennisapp.firebaseio.com');
         this.ref.once("value", function(snapshot) {
-            
             _this.setState({
                 courts: snapshot.val().sfcourts
             });
-
         function Legend(controlDiv, map) {
           // Set CSS styles for the DIV containing the control
           // Setting padding to 5 px will offset the control
@@ -57,17 +52,13 @@ var MiniMap = require('./miniMap');
           controlUI.appendChild(controlText); 
         }
 
-			
 			 var mapOptions = {
                 center: _this.mapCenterLatLng(),
                 zoom: 13,
                 styles: styles
             },
-            map = new google.maps.Map(_this.refs.gmap, mapOptions);
-        
-            var points = [];
-    
-        
+        map = new google.maps.Map(_this.refs.gmap, mapOptions);
+
         	for(var i=0; i<_this.state.courts.length; i++){
         		var temp = [_this.state.courts[i].xcoord,_this.state.courts[i].ycoord]
         		var a = new google.maps.LatLng(temp[0],temp[1]);
@@ -75,9 +66,9 @@ var MiniMap = require('./miniMap');
         		
         	}  
             
-        	var bounds = new google.maps.LatLngBounds(); 
-            function getPinColor(data){
+            var bounds = new google.maps.LatLngBounds(); 
             
+            function getPinColor(data){
                 if(data.type === 'shop'){
                     return "FE7569"
                 }else if(data.type === 'club'){
@@ -92,7 +83,7 @@ var MiniMap = require('./miniMap');
             }
 
         	for(var j=0; j<points.length; j++){
-                (function(j){
+          (function(j){
 
                 var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + getPinColor(_this.state.courts[j]),
                   new google.maps.Size(21, 34),
@@ -111,17 +102,14 @@ var MiniMap = require('./miniMap');
         		});
 
             google.maps.event.addListener(marker, 'click', function() {
-                
 
               if(_this.state.expanded === false){
                
                  _this.setState({
                   mini: null
                 });
-              
-
-                infowindow.open(map,marker);  
-              
+          
+                infowindow.open(map,marker);      
               
               // This is where the court data is set to the state of the app for display
               
@@ -166,24 +154,18 @@ var MiniMap = require('./miniMap');
                   lights: _this.state.courts[j].lights,
                   type: _this.state.courts[j].type,
                   mini: <MiniMap xcoord = {_this.state.courts[j].xcoord} ycoord = {_this.state.courts[j].ycoord}/>, 
-                  expanded: true
-                  
-                      
+                  expanded: true   
                 });   
               }else{
                 _this.setState({
                   name: "An error has occured",
                   expanded: true
                 }); 
-              } 
-              
-
-            }
-
+              }
+              }
             });
         		
-        		var contentString = '<div id="content"><font color = "orange">'+ _this.state.courts[j].name +
-            
+        		var contentString = '<div id="content"><font color = "orange">'+ _this.state.courts[j].name +  
             '<br/>'+
             '<br/>'+
             'Address: ' + _this.state.courts[j].address 
@@ -210,33 +192,25 @@ var MiniMap = require('./miniMap');
               }); //removes the marker
               // then, remove the infowindows name from the array
             });
-
-            
-        		
+	
         		bounds.extend(marker.getPosition());
         		map.setCenter(bounds.getCenter());
-        	
 
-                })(j) // maintain the data from the marker 
+         })(j) // maintain the data from the marker 
 
-            }
+         }// end of for loop
         
         	map.setZoom(map.getZoom()); 
 
-              // Create the legend and display on the map
+          // Create the legend and display on the map
           var legendDiv = document.createElement('div');
           legendDiv.style.color = "orange";
           var legend = new Legend(legendDiv, map);
           legendDiv.index = 1;
-          map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legendDiv);
-        
-		});
-
-        
-       
+          map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legendDiv);  
+		    });
     },
     mapCenterLatLng: function () {
-
         return new google.maps.LatLng(37.763108, -122.455799);
     },
 
@@ -245,7 +219,6 @@ var MiniMap = require('./miniMap');
     },
 
     render: function () {
-      
       var dataShowing;
       
       if(this.state.type === 'court' || this.state.type === 'other'){
@@ -297,8 +270,7 @@ var MiniMap = require('./miniMap');
       }else{
         dataShowing = <div> <h3> Select a Marker on the Map to Learn More about that Tennis Facility </h3> </div>
       }
-       
-      
+
     	var style = {
             height: '500px', 
     				width: '100%',
@@ -310,7 +282,7 @@ var MiniMap = require('./miniMap');
             width: '100%',
             color: 'black',
             backgroundColor: '#e3e0cf'
-      }
+          }
 
         return (
             <div className="test">
@@ -322,11 +294,10 @@ var MiniMap = require('./miniMap');
                   <div>
                     {this.state.mini}
                   </div>
-
                 </div>
             </div>
             );
-    }
+    }// render function
 });
 
 module.exports = GoogleMap;
